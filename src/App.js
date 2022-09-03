@@ -1,24 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect } from "react";
+import { Route, Routes } from "react-router-dom";
+import Web3 from "web3/dist/web3.min";
+import { Home } from "./views/Home";
 
 function App() {
+  useEffect(() => {
+    if (window.ethereum) {
+      const web3 = new Web3(window.ethereum);
+      web3.eth.requestAccounts().then(console.log);
+    }
+  }
+  );
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Routes>
+      <Route path="/" exact element={<Home/>} />
+    </Routes>
   );
 }
 
